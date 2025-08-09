@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BuscaMinas - Juego</title>
+<link rel="stylesheet" href="../css/app.css" />
+<link rel="stylesheet" href="../css/estilo_comun.css" />
+</head>
+<body class="page-game">
+  <!-- Header / menu -->
+  <header class="top-menu">
+    <nav>
+      <a id="newGame" href="#" class="menu-item">Nuevo juego</a>
+      <a id="restart" href="#" class="menu-item">Reiniciar</a>
+      <a href="reportar.html" class="menu-item">Reportar problema</a>
+      <a id="logout" href="#" class="menu-item right">Cerrar sesion</a>
+    </nav>
+  </header>
+
+  <main class="main-area">
+    <section class="game-panel">
+      <div class="board-wrap">
+        <div id="board" class="board"></div>
+      </div>
+    </section>
+
+    <aside class="side-panel">
+      <div class="info-box">
+        <p>Usuario: <span id="currentUser"></span></p>
+        <p>Minas: <span id="minesCount"></span></p>
+      </div>
+
+      <div class="comments-panel" id="commentsPanel">
+        <h3>Comentarios</h3>
+        <div class="comment-form">
+          <textarea id="commentTxt" placeholder="Escribe tu comentario..."></textarea>
+          <button id="sendComment">Enviar</button>
+          <p id="commentMsg" class="small-error"></p>
+        </div>
+        <div class="comment-list" id="commentList"></div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Modal resultado -->
+  <div id="modalResult" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modalTitle">Resultado</h2>
+      <p id="modalText"></p>
+      <div class="modal-actions">
+        <button id="modalNew">Nuevo juego</button>
+        <button id="modalRestart">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sonidos (solo para el juego) -->
+  <audio id="s_click_left" src="../sonidos/click_izquierdo.mp3"></audio>
+  <audio id="s_click_right" src="../sonidos/click_derecho.mp3"></audio>
+  <audio id="s_flag" src="../sonidos/bandera.mp3"></audio>
+  <audio id="s_explosion" src="../sonidos/explosion.mp3"></audio>
+  <audio id="s_victory" src="../sonidos/victoria.mp3"></audio>
+  <audio id="s_fail" src="../sonidos/fallido.mp3"></audio>
+
+<script src="../js/game.js"></script>
+<script src="../js/comments.js"></script>
+<script src="../js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "buscaminas-e2e",
+  "version": "1.0.0",
+  "description": "Pruebas E2E Selenium - BuscaMinasMichael",
+  "scripts": {
+    "test": "mocha tests --timeout 30000 --reporter mochawesome --reporter-options reportDir=reports,reportFilename=resultados",
+    "test:headed": "HEADLESS=false node ./node_modules/mocha/bin/mocha tests --timeout 30000 --reporter mochawesome --reporter-options reportDir=reports,reportFilename=resultados"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.15.0"
+  },
+  "devDependencies": {
+    "mocha": "^10.2.0",
+    "mochawesome": "^7.1.3",
+    "chromedriver": "^116.0.0"
+  }
+}

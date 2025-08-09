@@ -1,0 +1,43 @@
+/* Header/menu */
+.top-menu{background: #d8f200;padding:18px;color:#000;position:sticky;top:0;z-index:10}
+.top-menu nav{display:flex;align-items:center;justify-content:space-between;gap:10px;max-width:1200px;margin:0 auto}
+.menu-item{cursor:pointer;text-decoration:none;color:#000;padding:8px 12px;font-weight:500}
+.menu-item.right{margin-left:auto}
+
+/* Main layout for game */
+.main-area{display:flex;gap:20px;padding:24px;max-width:1200px;margin:20px auto}
+.game-panel{flex:1;background: #b87357;padding:16px;border-radius:6px}
+.board-wrap{background: #b87357;padding:14px;border-radius:4px}
+.board{background: #19A34A;display:grid;gap:6px;padding:10px;border:6px solid var(--dark);border-radius:6px}
+.cell{width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-weight:700;background:#0e9a3a;border-radius:4px;cursor:pointer;user-select:none}
+.cell.revealed{background:#b7ff8c;cursor:default;box-shadow:inset 0 0 0 2px rgba(0,0,0,.06)}
+.cell.flag::after{content:"🚩";font-size:20px}
+.cell.question::after{content:"❓";font-size:20px}
+.cell.mine::after{content:"💣";font-size:20px}
+.cell:hover{filter:brightness(.95)}
+.cell.number-1{color:blue}
+.cell.number-2{color:green}
+.cell.number-3{color:red}
+.cell.number-4{color:navy}
+.cell.number-5{color:brown}
+.cell.number-6{color:teal}
+
+/* Side panel */
+.side-panel{width:320px}
+.info-box{background:#fff;padding:12px;border-radius:6px;margin-bottom:12px}
+.comments-panel{background:#fff;padding:12px;border-radius:6px;max-height:520px;overflow:auto}
+.comment-form textarea{width:100%;height:70px;padding:8px}
+.comment-list{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.comment-item{background:#eee;padding:8px;border-radius:4px}
+.small-error{color:#c21;font-size:13px}
+
+/* Modal */
+.modal{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center}
+.modal.hidden{display:none}
+.modal-content{background:#fff;padding:18px;border-radius:6px;text-align:center;min-width:320px}
+.modal-actions button{margin:8px;padding:8px 12px}
+
+/* report page */
+.report-wrap{display:flex;align-items:center;justify-content:center;padding:40px}
+.report-box{width:520px;background:#fff;padding:20px;border-radius:10px}
+.report-box input, .report-box textarea{width:100%;padding:10px;margin:8px 0}
