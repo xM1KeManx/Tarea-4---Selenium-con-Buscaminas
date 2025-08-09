@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Reporte de Pruebas - BuscaMinasMichael</title>
+<style>
+  :root{--bg:#f6f8f7;--card:#ffffff;--accent:#19A34A;--muted:#666;--danger:#d9534f}
+  body{font-family: "Segoe UI", Roboto, Arial, sans-serif;background:var(--bg);margin:0;padding:20px;color:#222}
+  header{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  header img{width:64px;height:64px;border-radius:8px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+  .title{font-size:20px;margin:0}
+  .subtitle{font-size:13px;color:var(--muted);margin:0}
+  .container{max-width:1100px;margin:0 auto}
+  .card{background:var(--card);padding:14px;border-radius:8px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+  h2{margin:0 0 8px 0}
+  .meta{display:flex;gap:12px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+  .flex-row{display:flex;gap:12px;align-items:center}
+  .btn{background:var(--accent);color:#fff;padding:8px 12px;border-radius:6px;text-decoration:none;font-weight:600;cursor:pointer;border:none}
+  .btn.secondary{background:#ddd;color:#222}
+  .small{font-size:13px;color:var(--muted)}
+  table{width:100%;border-collapse:collapse;margin-top:8px}
+  th,td{padding:10px;border-bottom:1px solid #eee;text-align:left}
+  th{background:#fafafa}
+  .status{font-weight:700;padding:6px 10px;border-radius:16px;display:inline-block;font-size:13px}
+  .status.pending{background:#fff3cd;color:#856404}
+  .status.pass{background:#d4edda;color:#155724}
+  .status.fail{background:#f8d7da;color:#721c24}
+  .screenshot{max-width:180px;border-radius:6px;border:1px solid #e6e6e6;margin-right:8px;margin-bottom:8px}
+  .evidence-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .hint{font-size:13px;color:var(--muted);margin-top:6px}
+  .footer{font-size:13px;color:var(--muted);text-align:center;margin-top:18px}
+  details summary{cursor:pointer;padding:8px;background:#fafafa;border-radius:6px}
+  .log{white-space:pre-wrap;background:#111;color:#0f0;padding:10px;border-radius:6px;font-family:monospace;font-size:12px;max-height:160px;overflow:auto}
+  /* responsive */
+  @media(max-width:700px){
+    .flex-row{flex-direction:column;align-items:flex-start}
+    .screenshot{max-width:45%}
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://raw.githubusercontent.com/xM1KeManx/Tarea-4---Selenium-con-Buscaminas/main/html/images/mina-terrestre.png" alt="logo" onerror="this.style.display='none'"/>
+      <div>
+        <p class="title">Reporte de Pruebas — BuscaMinasMichael</p>
+        <p class="subtitle">Reporte generado por: <strong>Michael (automático/manual)</strong> — Fecha: <strong>9 de agosto de 2025</strong></p>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Resumen del proyecto</h2>
+      <p class="small">Este proyecto contiene el front-end del buscaminas con login/register, comentarios y reporte de fallos. Las pruebas incluidas en este reporte son automatizadas con <strong>Selenium (Python)</strong>.</p>
+      <div class="meta" style="margin-top:8px">
+        <div>Repositorio: <a href="https://github.com/xM1KeManx/Tarea-4---Selenium-con-Buscaminas.git" target="_blank">GitHub / Tarea-4---Selenium-con-Buscaminas</a></div>
+        <div>Carpeta de pruebas: <code>tests_python/tests.py</code></div>
+        <div>Servidor esperado: <code>http://localhost:8000/html</code></div>
+      </div>
+      <p class="hint">Nota: guarda capturas en la carpeta <code>screenshots/</code> para que el reporte muestre evidencia visual.</p>
+    </section>
+
+    <section class="card">
+      <h2>Entorno de ejecución</h2>
+      <ul class="small">
+        <li>SO: Windows (usuario: Michael)</li>
+        <li>Python: (versión local — ejecutar <code>python --version</code>)</li>
+        <li>Browser: Google Chrome (se recomienda misma versión que ChromeDriver)</li>
+        <li>ChromeDriver: ruta local o incluida en <code>PATH</code></li>
+      </ul>
+      <details>
+        <summary>Instrucciones rápidas para ejecutar pruebas</summary>
+        <ol class="small">
+          <li>Levanta el servidor en la carpeta del proyecto: <code>python -m http.server 8000</code></li>
+          <li>En otra terminal, ejecutar: <code>python tests_python/tests.py</code></li>
+          <li>Las capturas quedarán en <code>screenshots/</code> y se pueden adjuntar manualmente al reporte.</li>
+        </ol>
+      </details>
+    </section>
+
+    <section class="card">
+      <h2>Casos de prueba (5) — estado general</h2>
+      <table>
+        <thead>
+          <tr><th>#</th><th>Descripción</th><th>Usuario</th><th>Estado</th><th>Evidencia</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Login correcto (admin / 1234) — debe redirigir a juego</td>
+            <td>admin</td>
+            <td><span class="status pending" id="s1">Pendiente</span></td>
+            <td><button class="btn secondary" onclick="showShots('login_correcto')">Ver / Buscar captura</button></td>
+          </tr>
+
+          <tr>
+            <td>2</td>
+            <td>Login incorrecto — mostrar mensaje de error</td>
+            <td>noexisto</td>
+            <td><span class="status pending" id="s2">Pendiente</span></td>
+            <td><button class="btn secondary" onclick="showShots('login_incorrecto')">Ver / Buscar captura</button></td>
+          </tr>
+
+          <tr>
+            <td>3</td>
+            <td>Registro de nuevo usuario — redirigir y mostrar nombre</td>
+            <td>userTIMESTAMP</td>
+            <td><span class="status pending" id="s3">Pendiente</span></td>
+            <td><button class="btn secondary" onclick="showShots('registro_usuario_nuevo')">Ver / Buscar captura</button></td>
+          </tr>
+
+          <tr>
+            <td>4</td>
+            <td>Colocar bandera en una celda (clic derecho ciclo)</td>
+            <td>admin</td>
+            <td><span class="status pending" id="s4">Pendiente</span></td>
+            <td><button class="btn secondary" onclick="showShots('colocar_bandera')">Ver / Buscar captura</button></td>
+          </tr>
+
+          <tr>
+            <td>5</td>
+            <td>Enviar comentario y verificar aparición</td>
+            <td>cmtTIMESTAMP</td>
+            <td><span class="status pending" id="s5">Pendiente</span></td>
+            <td><button class="btn secondary" onclick="showShots('enviar_comentario')">Ver / Buscar captura</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="hint">Cómo actualizar resultados manualmente: edita los elementos <code>id="s1"</code>.. <code>id="s5"</code> y cambia la clase a <code>status pass</code> o <code>status fail</code>, además escribe observaciones en "Logs / Observaciones" más abajo.</p>
+    </section>
+
+    <section class="card" id="evidenceCard" style="display:none">
+      <h2>Evidencia (capturas)</h2>
+      <p class="small">Si has ejecutado las pruebas, aquí aparecerán las imágenes guardadas en <code>screenshots/</code>.</p>
+      <div id="evidenceGallery" class="evidence-row"></div>
+      <p class="hint">Si no se muestran imágenes, asegúrate de que la ruta es <code>BuscaMinasMichael/screenshots/</code> y que los archivos contienen en su nombre alguno de los sufijos: <code>login_correcto</code>, <code>login_incorrecto</code>, <code>registro_usuario_nuevo</code>, <code>colocar_bandera</code>, <code>enviar_comentario</code>.</p>
+    </section>
+
+    <section class="card">
+      <h2>Logs / Observaciones</h2>
+      <div class="log" id="logArea">
+Usuario: Michael
+Repositorio: https://github.com/xM1KeManx/Tarea-4---Selenium-con-Buscaminas.git
+Fecha del reporte: 2025-08-09
+
+Observaciones iniciales:
+- Pruebas preparadas en Python (tests_python/tests.py). 
+- Asegúrate de servir la carpeta html desde un servidor local.
+- Sonido, reproducción y comportamiento pueden variar si el navegador corre en modo headless.
+- Si un test falla, toma la captura ubicada en screenshots/ y compártela con el equipo.
+
+Cambios recomendados:
+- Integrar pytest + pytest-html para generar reporte HTML automáticamente.
+- Añadir limpieza de localStorage entre tests para evitar efectos de datos previos.
+
+(Agrega aquí notas adicionales después de ejecutar las pruebas...)
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Checklist de entrega (para la tarea)</h2>
+      <ul class="small">
+        <li>✅ Código fuente de las pruebas en Selenium — <code>tests_python/tests.py</code></li>
+        <li>✅ Historias de usuario (documento aparte) — 5 HU</li>
+        <li>✅ Reporte en formato HTML (este documento)</li>
+        <li>❗ Capturas por cada escenario (guardar en <code>screenshots/</code>)</li>
+        <li>❗ Video demostrativo público (subir a YouTube y dejar link)</li>
+        <li>✅ Repositorio en GitHub con acceso (link arriba)</li>
+      </ul>
+      <p class="small">Consejo: una vez que ejecutes las pruebas, copia las capturas en esta carpeta y actualiza los estados en la tabla para tener un reporte listo para entregar.</p>
+    </section>
+
+    <footer class="footer">
+      <p>Hecho con cariño y un poco de código amateur 💚 — Si quieres, actualizo este reporte para que incruste automáticamente las capturas y marque los estados tras ejecutar <code>pytest</code> o un runner.</p>
+      <p class="small">Contacto: Michael (en tu repo de GitHub)</p>
+    </footer>
+  </div>
+
+<script>
+  function showShots(suffix){
+    const gallery = document.getElementById('evidenceGallery');
+    gallery.innerHTML = '';
+    const folder = 'screenshots/';
+
+    const promptMsg = 'Para mostrar las capturas, pega los nombres completos de los archivos (separados por comas) que contengan "' + suffix + '"\\n\\nEjemplo: 1691234567_' + suffix + '.png,1691234667_' + suffix + '.png\\n\\nSi no tienes capturas aún, presiona Cancelar.';
+    const input = prompt(promptMsg, '');
+    if(!input) return;
+    const files = input.split(',').map(s=>s.trim()).filter(Boolean);
+    files.forEach(f=>{
+      const path = folder + f;
+      const img = document.createElement('img');
+      img.src = path;
+      img.className = 'screenshot';
+      img.onerror = function(){ 
+        const no = document.createElement('div'); 
+        no.textContent = 'No se encontró: ' + path; 
+        no.style.color = '#b33'; 
+        gallery.appendChild(no); 
+      };
+      gallery.appendChild(img);
+    });
+    document.getElementById('evidenceCard').style.display = 'block';
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+</script>
+</body>
+</html>
